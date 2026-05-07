@@ -1,323 +1,351 @@
-// ================================
-// SHARMA KIRANA STORE - SCRIPT.JS
-// ================================
+// =======================
+// FUTURE API READY
+// =======================
 
-// 1. Product Database
-const products = [
+let products = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let currentCategory = "All";
+
+// =======================
+// FETCH PRODUCTS
+// =======================
+
+async function loadProducts() {
+
+  // FUTURE CLOUDFLARE KV API READY
+  // const response = await fetch("/api/products");
+  // products = await response.json();
+
+  // TEMP LOCAL DATA
+  products = [
+
     {
-        id: 1,
-        name: "Amul Taaza Milk",
-        price: 25,
-        unit: "500ml",
-        imageUrl: "https://i.pinimg.com/736x/cb/16/69/cb16696e20e1f0a8298a11fab8adcacc.jpg"
+      id: 1,
+      name: "Milk",
+      category: "Dairy",
+      price: 30,
+      image: "https://i.pinimg.com/736x/cb/16/69/cb16696e20e1f0a8298a11fab8adcacc.jpg"
     },
+
     {
-        id: 2,
-        name: "Farm Fresh Eggs",
-        price: 48,
-        unit: "6 pcs",
-        imageUrl: "https://i.pinimg.com/736x/44/63/ed/4463ed18a381ac7edd7bf82f65ceac49.jpg"
+      id: 2,
+      name: "Eggs",
+      category: "Dairy",
+      price: 60,
+      image: "https://i.pinimg.com/736x/44/63/ed/4463ed18a381ac7edd7bf82f65ceac49.jpg"
     },
+
     {
-        id: 3,
-        name: "Brown Bread",
-        price: 40,
-        unit: "1 pack",
-        imageUrl: "https://i.pinimg.com/736x/74/2b/85/742b85dd4ec5f0f9efb02c81f5f1b3d4.jpg"
+      id: 3,
+      name: "Chips",
+      category: "Snacks",
+      price: 20,
+      image: "https://i.pinimg.com/736x/c1/5a/7f/c15a7ff35afe99a39310ac5dab5dfcd7.jpg"
     },
+
     {
-        id: 4,
-        name: "Bananas",
-        price: 60,
-        unit: "1 dozen",
-        imageUrl: "https://i.pinimg.com/736x/09/55/46/095546d7b7d2dcf82f28c4b5b95f4d4f.jpg"
-    },
-    {
-        id: 5,
-        name: "Haldiram Bhujia",
-        price: 110,
-        unit: "400g",
-        imageUrl: "https://i.pinimg.com/736x/c1/5a/7f/c15a7ff35afe99a39310ac5dab5dfcd7.jpg"
-    },
-    {
-        id: 6,
-        name: "Fresh Tomatoes",
-        price: 35,
-        unit: "500g",
-        imageUrl: "https://i.pinimg.com/736x/54/d3/76/54d3764e0c4d67a40c4cb63f52f4f70f.jpg"
+      id: 4,
+      name: "Tomato",
+      category: "Veggies",
+      price: 40,
+      image: "https://i.pinimg.com/736x/54/d3/76/54d3764e0c4d67a40c4cb63f52f4f70f.jpg"
     }
-];
+  ];
 
-// 2. Cart State
-let cart = JSON.parse(localStorage.getItem("sharma_kirana_cart")) || [];
-
-// ================================
-// SAVE CART TO STORAGE
-// ================================
-function saveCart() {
-    localStorage.setItem("sharma_kirana_cart", JSON.stringify(cart));
+  renderCategories();
+  renderProducts();
 }
 
-// ================================
-// GET PRODUCT QUANTITY
-// ================================
-function getProductQuantity(productId) {
-    const item = cart.find(item => item.id === productId);
-    return item ? item.quantity : 0;
+// =======================
+// RENDER CATEGORIES
+// =======================
+
+function renderCategories() {
+
+  const categories = ["All", ...new Set(products.map(p => p.category))];
+
+  const bar = document.getElementById("category-bar");
+
+  bar.innerHTML = categories.map(category => `
+
+    <button
+      onclick="filterCategory('${category}')"
+      class="category-btn ${currentCategory === category ? 'active' : ''}"
+    >
+
+      ${category}
+
+    </button>
+
+  `).join("");
 }
 
-// ================================
-// RENDER PRODUCTS GRID
-// ================================
-function renderProducts(filteredProducts = products) {
-    const productGrid = document.getElementById("product-grid");
-    if (!productGrid) return;
+function filterCategory(category) {
 
-    if (filteredProducts.length === 0) {
-        productGrid.innerHTML = `
-            <div class="col-span-2 text-center py-8 text-gray-400">
-                <i class="fa-solid fa-face-frown text-3xl mb-2 block"></i>
-                No items found!
-            </div>`;
-        return;
-    }
+  currentCategory = category;
 
-    productGrid.innerHTML = filteredProducts.map(product => {
-        const quantity = getProductQuantity(product.id);
-
-        return `
-        <div class="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col group transition-all hover:shadow-md">
-            <div class="h-28 w-full bg-brand-gray rounded-xl overflow-hidden mb-3">
-                <img src="${product.imageUrl}" 
-                     alt="${product.name}"
-                     class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300">
-            </div>
-            <div class="flex-grow">
-                <h4 class="text-sm font-semibold text-gray-800 leading-tight mb-1">
-                    ${product.name}
-                </h4>
-                <p class="text-xs text-gray-500 mb-3">
-                    ${product.unit}
-                </p>
-            </div>
-            <div class="flex items-center justify-between mt-auto">
-                <span class="text-sm font-bold">
-                    ₹${product.price}
-                </span>
-                ${
-                    quantity > 0
-                    ? `
-                    <div class="flex items-center gap-3 bg-green-50 border border-brand-green/30 rounded-xl p-1 shadow-sm">
-                        <button onclick="updateQuantity(${product.id}, -1)"
-                            class="bg-brand-green text-white w-6 h-6 rounded-lg font-bold flex items-center justify-center hover:bg-green-700 active:scale-90 transition-all">
-                            -
-                        </button>
-                        <span class="font-black text-brand-dark text-sm w-4 text-center">
-                            ${quantity}
-                        </span>
-                        <button onclick="updateQuantity(${product.id}, 1)"
-                            class="bg-brand-green text-white w-6 h-6 rounded-lg font-bold flex items-center justify-center hover:bg-green-700 active:scale-90 transition-all">
-                            +
-                        </button>
-                    </div>
-                    `
-                    : `
-                    <button onclick="updateQuantity(${product.id}, 1)"
-                        class="bg-white border border-brand-green text-brand-green font-bold text-xs px-4 py-1.5 rounded-lg hover:bg-brand-green hover:text-white transition-all active:scale-95">
-                        ADD
-                    </button>
-                    `
-                }
-            </div>
-        </div>`;
-    }).join("");
+  renderCategories();
+  renderProducts();
 }
 
-// ================================
-// UPDATE QUANTITY (Both Grid and Modal)
-// ================================
-function updateQuantity(productId, change) {
-    const existingItem = cart.find(item => item.id === productId);
+// =======================
+// RENDER PRODUCTS
+// =======================
 
-    if (existingItem) {
-        existingItem.quantity += change;
-        if (existingItem.quantity <= 0) {
-            cart = cart.filter(item => item.id !== productId);
-        }
-    } else if (change > 0) {
-        const product = products.find(p => p.id === productId);
-        cart.push({
-            ...product,
-            quantity: 1
-        });
-    }
+function renderProducts() {
 
-    saveCart();
-    renderProducts();
-    updateCartUI();
+  const grid = document.getElementById("product-grid");
 
-    // Live update items list in bottom sheet if open
-    const modal = document.getElementById("checkout-modal");
-    if (modal && !modal.classList.contains("invisible")) {
-        renderModalItems();
-    }
-}
+  let filtered = [...products];
 
-// ================================
-// UPDATE FLOATING BOTTOM CART
-// ================================
-function updateCartUI() {
-    const floatingCart = document.getElementById("floating-cart");
-    const cartCountEl = document.getElementById("cart-count");
-    const cartTotalEl = document.getElementById("cart-total");
+  // SEARCH
+  const query = document
+    .getElementById("search-input")
+    .value
+    .toLowerCase();
 
-    if (!floatingCart) return;
+  filtered = filtered.filter(product =>
+    product.name.toLowerCase().includes(query)
+  );
 
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  // CATEGORY
+  if (currentCategory !== "All") {
 
-    if (totalItems > 0) {
-        floatingCart.classList.remove("hidden");
-        cartCountEl.innerText = `${totalItems} Items`;
-        cartTotalEl.innerText = `₹${totalPrice}`;
-    } else {
-        floatingCart.classList.add("hidden");
-        // If modal was open, shut it down automatically when cart goes empty
-        closeCheckoutModal();
-    }
-}
+    filtered = filtered.filter(
+      product => product.category === currentCategory
+    );
+  }
 
-// ================================
-// RENDER CART ITEMS IN MODAL
-// ================================
-function renderModalItems() {
-    const itemsList = document.getElementById("cart-items-list");
-    const modalSubtotal = document.getElementById("modal-subtotal");
-    const modalTotal = document.getElementById("modal-total");
+  grid.innerHTML = filtered.map(product => {
 
-    if (!itemsList || !modalSubtotal || !modalTotal) return;
+    const item = cart.find(i => i.id === product.id);
 
-    if (cart.length === 0) {
-        itemsList.innerHTML = `<p class="text-gray-500 text-center py-6">Your basket is empty!</p>`;
-        modalSubtotal.innerText = `₹0`;
-        modalTotal.innerText = `₹0`;
-        return;
-    }
+    const qty = item ? item.quantity : 0;
 
-    itemsList.innerHTML = cart.map(item => `
-        <div class="flex justify-between items-center border-b border-gray-100 py-3">
-            <div class="flex items-center gap-3">
-                <img src="${item.imageUrl}" class="w-12 h-12 rounded-lg object-cover border border-gray-100">
-                <div>
-                    <h4 class="font-semibold text-sm text-brand-dark">${item.name}</h4>
-                    <p class="text-xs text-gray-400">₹${item.price} per ${item.unit}</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-2 py-0.5">
-                    <button onclick="updateQuantity(${item.id}, -1)" class="text-brand-green font-black text-sm w-4 h-4 flex items-center justify-center">-</button>
-                    <span class="font-bold text-brand-dark text-xs">${item.quantity}</span>
-                    <button onclick="updateQuantity(${item.id}, 1)" class="text-brand-green font-black text-sm w-4 h-4 flex items-center justify-center">+</button>
-                </div>
-                <span class="font-bold text-sm text-brand-dark min-w-[50px] text-right">
-                    ₹${item.quantity * item.price}
-                </span>
-            </div>
+    return `
+
+      <div class="product-card">
+
+        <img
+          src="${product.image}"
+          class="h-32 w-full object-cover rounded-2xl"
+        >
+
+        <h3 class="font-bold mt-3">${product.name}</h3>
+
+        <p class="text-sm opacity-70">
+          ${product.category}
+        </p>
+
+        <div class="flex justify-between items-center mt-4">
+
+          <span class="font-bold">
+            ₹${product.price}
+          </span>
+
+          ${
+            qty > 0
+            ?
+            `
+              <div class="flex items-center gap-2">
+
+                <button onclick="updateQuantity(${product.id}, -1)">
+                  -
+                </button>
+
+                <span>${qty}</span>
+
+                <button onclick="updateQuantity(${product.id}, 1)">
+                  +
+                </button>
+
+              </div>
+            `
+            :
+            `
+              <button
+                onclick="updateQuantity(${product.id}, 1)"
+                class="bg-[var(--accent)] text-white px-4 py-2 rounded-xl"
+              >
+                ADD
+              </button>
+            `
+          }
+
         </div>
-    `).join("");
 
-    const totalBill = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    modalSubtotal.innerText = `₹${totalBill}`;
-    modalTotal.innerText = `₹${totalBill}`;
+      </div>
+
+    `;
+  }).join("");
 }
 
-// ================================
-// BOTTOM SHEET ANILMATIONS
-// ================================
-function openCheckoutModal() {
-    const modal = document.getElementById("checkout-modal");
-    const overlay = document.getElementById("modal-overlay");
-    const sheet = document.getElementById("modal-sheet");
+// =======================
+// UPDATE QUANTITY
+// =======================
 
-    if (!modal || !overlay || !sheet) return;
+function updateQuantity(productId, change) {
 
-    if (cart.length === 0) {
-        alert("Cart is empty!");
-        return;
+  const item = cart.find(i => i.id === productId);
+
+  if (item) {
+
+    item.quantity += change;
+
+    if (item.quantity <= 0) {
+
+      cart = cart.filter(i => i.id !== productId);
     }
 
-    renderModalItems();
+  } else {
 
-    // Trigger Slide-up and Fade-in
-    modal.classList.remove("invisible");
-    setTimeout(() => {
-        overlay.classList.remove("opacity-0");
-        overlay.classList.add("opacity-100");
-        sheet.classList.remove("translate-y-full");
-        sheet.classList.add("translate-y-0");
-    }, 10);
+    cart.push({
+      id: productId,
+      quantity: 1
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  renderProducts();
+}
+
+// =======================
+// SEARCH
+// =======================
+
+document
+  .getElementById("search-input")
+  .addEventListener("input", renderProducts);
+
+// =======================
+// CART MODAL
+// =======================
+
+document
+  .getElementById("view-cart-btn")
+  .addEventListener("click", openCheckoutModal);
+
+function openCheckoutModal() {
+
+  const modal = document.getElementById("checkout-modal");
+
+  const itemsContainer = document.getElementById("checkout-items");
+
+  modal.classList.remove("hidden");
+
+  const cartProducts = cart.map(item => {
+
+    const product = products.find(p => p.id === item.id);
+
+    return {
+      ...product,
+      quantity: item.quantity
+    };
+  });
+
+  itemsContainer.innerHTML = cartProducts.map(item => `
+
+    <div class="flex justify-between">
+
+      <div>
+
+        <h4 class="font-bold">
+          ${item.name}
+        </h4>
+
+        <p class="text-sm opacity-70">
+          ${item.quantity} x ₹${item.price}
+        </p>
+
+      </div>
+
+      <span class="font-bold">
+        ₹${item.quantity * item.price}
+      </span>
+
+    </div>
+
+  `).join("");
+
+  const total = cartProducts.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  document.getElementById("checkout-total").innerText = `₹${total}`;
 }
 
 function closeCheckoutModal() {
-    const modal = document.getElementById("checkout-modal");
-    const overlay = document.getElementById("modal-overlay");
-    const sheet = document.getElementById("modal-sheet");
 
-    if (!modal || !overlay || !sheet) return;
-
-    // Trigger Slide-down and Fade-out
-    overlay.classList.remove("opacity-100");
-    overlay.classList.add("opacity-0");
-    sheet.classList.remove("translate-y-0");
-    sheet.classList.add("translate-y-full");
-
-    setTimeout(() => {
-        modal.classList.add("invisible");
-    }, 300); // Wait for transition animation to end
+  document
+    .getElementById("checkout-modal")
+    .classList.add("hidden");
 }
 
-// ================================
-// PLACE ORDER FUNCTION
-// ================================
+// =======================
+// PLACE ORDER
+// =======================
+
 function placeOrder() {
-    alert("🎉 Order Placed Successfully! Delivery partner will arrive shortly.");
-    cart = [];
-    saveCart();
-    renderProducts();
-    updateCartUI();
-    closeCheckoutModal();
+
+  const totalItems = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
+  document.getElementById(
+    "success-summary"
+  ).innerText = `${totalItems} items will arrive in 10 mins 🚀`;
+
+  document
+    .getElementById("success-modal")
+    .classList.remove("hidden");
+
+  cart = [];
+
+  localStorage.removeItem("cart");
+
+  closeCheckoutModal();
+
+  renderProducts();
 }
 
-// ================================
-// SEARCH SYSTEM
-// ================================
-const searchInput = document.getElementById("search-input");
-if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-        const query = e.target.value.toLowerCase();
-        const filteredProducts = products.filter(product => {
-            return product.name.toLowerCase().includes(query);
-        });
-        renderProducts(filteredProducts);
-    });
+function closeSuccessModal() {
+
+  document
+    .getElementById("success-modal")
+    .classList.add("hidden");
 }
 
-// ================================
-// DOM INITIALIZATION
-// ================================
-document.addEventListener("DOMContentLoaded", () => {
-    renderProducts();
-    updateCartUI();
+// =======================
+// OTAKU MODE
+// =======================
 
-    const viewCartBtn = document.getElementById("view-cart-btn");
-    const closeModalBtn = document.getElementById("close-modal-btn");
-    const dragHandle = document.getElementById("close-drag");
-    const overlay = document.getElementById("modal-overlay");
-    const placeOrderBtn = document.getElementById("place-order-btn");
+const themeToggle = document.getElementById("theme-toggle");
 
-    if (viewCartBtn) viewCartBtn.addEventListener("click", openCheckoutModal);
-    if (closeModalBtn) closeModalBtn.addEventListener("click", closeCheckoutModal);
-    if (dragHandle) dragHandle.addEventListener("click", closeCheckoutModal);
-    if (overlay) overlay.addEventListener("click", closeCheckoutModal);
-    if (placeOrderBtn) placeOrderBtn.addEventListener("click", placeOrder);
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "otaku") {
+
+  document.body.classList.add("otaku-mode");
+}
+
+themeToggle.addEventListener("click", () => {
+
+  document.body.classList.toggle("otaku-mode");
+
+  const isOtaku = document.body.classList.contains("otaku-mode");
+
+  localStorage.setItem(
+    "theme",
+    isOtaku ? "otaku" : "normal"
+  );
 });
+
+// =======================
+// INIT
+// =======================
+
+loadProducts();
