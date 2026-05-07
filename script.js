@@ -5,28 +5,28 @@ const products = [
         name: "Amul Taaza Toned Milk", 
         price: 25, 
         unit: "500 ml", 
-        imageUrl: "https://via.placeholder.com/150/F3F4F6/9CA3AF?text=Milk" 
+        imageUrl: "https://i.pinimg.com/736x/cb/16/69/cb16696e20e1f0a8298a11fab8adcacc.jpg" 
     },
     { 
         id: 2, 
         name: "Fresh Coriander (Dhania)", 
         price: 15, 
         unit: "100 g", 
-        imageUrl: "https://via.placeholder.com/150/F3F4F6/9CA3AF?text=Coriander" 
+        imageUrl: "https://i.pinimg.com/736x/a1/ee/3e/a1ee3ee4c9e6a76459e8bcffef95790f.jpg" 
     },
     { 
         id: 3, 
         name: "Haldiram's Bhujia Sev", 
         price: 110, 
         unit: "400 g", 
-        imageUrl: "https://via.placeholder.com/150/F3F4F6/9CA3AF?text=Bhujia" 
+        imageUrl: "https://i.pinimg.com/736x/c1/5a/7f/c15a7ff35afe99a39310ac5dab5dfcd7.jpg" 
     },
     { 
         id: 4, 
         name: "Farm Fresh White Eggs", 
         price: 48, 
         unit: "6 pcs", 
-        imageUrl: "https://via.placeholder.com/150/F3F4F6/9CA3AF?text=Eggs" 
+        imageUrl: "https://i.pinimg.com/736x/44/63/ed/4463ed18a381ac7edd7bf82f65ceac49.jpg" 
     }
 ];
 
