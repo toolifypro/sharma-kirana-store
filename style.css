@@ -1,31 +1,104 @@
+/* ===================================== */
+/* SHARMA KIRANA • ULTRA EDITION CSS */
+/* ===================================== */
+
 :root {
 
-  --bg: #f7f8fa;
+  --bg: #f5f7fb;
   --card: #ffffff;
   --text: #111827;
+
   --accent: #16a34a;
+  --accent-light: #dcfce7;
+
   --border: #e5e7eb;
+
+  --shadow:
+    0 10px 30px rgba(0,0,0,0.06);
+
+  --glass:
+    rgba(255,255,255,0.5);
 }
 
+/* ===================================== */
 /* OTAKU MODE */
+/* ===================================== */
+
 .otaku-mode {
 
-  --bg: #e8f1ff;
+  --bg: #eaf2ff;
+
   --card: #ffffff;
+
   --text: #1e293b;
+
   --accent: #ec4899;
-  --border: #cbd5e1;
+
+  --accent-light: #fce7f3;
+
+  --border: #dbeafe;
+
+  --shadow:
+    0 12px 35px rgba(236,72,153,0.15);
+
+  --glass:
+    rgba(255,255,255,0.65);
+}
+
+/* ===================================== */
+/* GLOBAL */
+/* ===================================== */
+
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+
+  scroll-behavior: smooth;
 }
 
 body {
 
   background: var(--bg);
+
   color: var(--text);
+
   font-family: 'Poppins', sans-serif;
-  transition: 0.3s ease;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
-/* CATEGORY SCROLL */
+/* ===================================== */
+/* SCROLLBAR */
+/* ===================================== */
+
+::-webkit-scrollbar {
+
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: var(--accent);
+
+  border-radius: 999px;
+}
+
+/* ===================================== */
+/* CATEGORY BAR */
+/* ===================================== */
+
+.category-scroll {
+
+  scrollbar-width: none;
+}
+
 .category-scroll::-webkit-scrollbar {
 
   display: none;
@@ -34,103 +107,461 @@ body {
 .category-btn {
 
   white-space: nowrap;
+
   border: 1px solid var(--border);
+
   padding: 10px 18px;
+
   border-radius: 999px;
+
   background: var(--card);
+
   font-size: 14px;
+
   font-weight: 600;
+
+  color: var(--text);
+
+  transition: 0.25s ease;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.03);
 }
 
-.category-btn.active {
+.category-btn:hover {
+
+  transform: translateY(-2px);
+}
+
+.active-category {
 
   background: var(--accent);
+
   color: white;
+
+  border-color: transparent;
 }
 
+/* ===================================== */
 /* PRODUCT CARD */
+/* ===================================== */
+
 .product-card {
 
   background: var(--card);
-  border-radius: 24px;
+
+  border-radius: 28px;
+
   padding: 14px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  overflow: hidden;
+
+  position: relative;
 }
 
-/* CHECKOUT */
+.product-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.08);
+}
+
+/* ===================================== */
+/* PRODUCT IMAGE */
+/* ===================================== */
+
+.product-image {
+
+  width: 100%;
+
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 24px;
+
+  background: #f3f4f6;
+
+  transition: 0.3s ease;
+}
+
+.product-card:hover .product-image {
+
+  transform: scale(1.03);
+}
+
+/* ===================================== */
+/* GLASS CATEGORY BADGE */
+/* ===================================== */
+
+.glass-badge {
+
+  backdrop-filter: blur(10px);
+
+  background: rgba(255,255,255,0.55);
+
+  border: 1px solid rgba(255,255,255,0.3);
+
+  color: black;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+/* ===================================== */
+/* ADD BUTTON */
+/* ===================================== */
+
+.add-btn {
+
+  background: var(--accent);
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 14px;
+
+  font-weight: 700;
+
+  transition: 0.25s ease;
+
+  cursor: pointer;
+}
+
+.add-btn:hover {
+
+  transform: scale(1.05);
+}
+
+/* ===================================== */
+/* QUANTITY BOX */
+/* ===================================== */
+
+.qty-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  background: var(--accent-light);
+
+  padding: 8px 12px;
+
+  border-radius: 16px;
+}
+
+.qty-btn {
+
+  width: 28px;
+
+  height: 28px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--accent);
+
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.qty-btn:hover {
+
+  transform: scale(1.1);
+}
+
+/* ===================================== */
+/* THEME BUTTON */
+/* ===================================== */
+
+.theme-btn {
+
+  width: 48px;
+
+  height: 48px;
+
+  border-radius: 999px;
+
+  border: 1px solid var(--border);
+
+  background: var(--card);
+
+  box-shadow: var(--shadow);
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  font-size: 18px;
+
+  color: var(--text);
+}
+
+.theme-btn:hover {
+
+  transform: rotate(12deg) scale(1.05);
+}
+
+/* ===================================== */
+/* PROFILE MENU */
+/* ===================================== */
+
+.menu-item {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  transition: 0.2s ease;
+
+  font-weight: 500;
+}
+
+.menu-item:hover {
+
+  background: #f3f4f6;
+}
+
+/* ===================================== */
+/* CHECKOUT SHEET */
+/* ===================================== */
+
 .checkout-sheet {
 
   position: absolute;
+
   bottom: 0;
+
   width: 100%;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
   background: var(--card);
-  border-radius: 30px 30px 0 0;
+
+  border-radius: 32px 32px 0 0;
+
   padding: 24px;
+
   animation: slideUp 0.3s ease;
+
+  box-shadow:
+    0 -10px 30px rgba(0,0,0,0.1);
 }
 
-@keyframes slideUp {
+/* ===================================== */
+/* CHECKOUT ITEM */
+/* ===================================== */
 
-  from {
-    transform: translateY(100%);
-  }
+.checkout-item {
 
-  to {
-    transform: translateY(0);
-  }
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px;
+
+  border-radius: 20px;
+
+  background: var(--bg);
 }
 
-/* SUCCESS */
+/* ===================================== */
+/* SUCCESS MODAL */
+/* ===================================== */
+
 .success-box {
 
-  background: white;
-  width: 90%;
-  max-width: 340px;
-  border-radius: 28px;
-  padding: 30px;
+  background: var(--card);
+
+  width: 92%;
+
+  max-width: 360px;
+
+  border-radius: 32px;
+
+  padding: 35px;
+
   text-align: center;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.15);
+
+  animation: popIn 0.35s ease;
 }
+
+/* ===================================== */
+/* CHECKMARK */
+/* ===================================== */
 
 .checkmark-wrapper {
 
-  width: 90px;
-  height: 90px;
+  width: 100px;
+
+  height: 100px;
+
   border-radius: 999px;
+
   background: #22c55e20;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   margin: auto;
 }
 
 .checkmark {
 
-  width: 40px;
-  height: 20px;
+  width: 42px;
+
+  height: 22px;
+
   border-left: 5px solid #22c55e;
+
   border-bottom: 5px solid #22c55e;
+
   transform: rotate(-45deg);
+
   animation: pop 0.5s ease;
+}
+
+/* ===================================== */
+/* ANIMATIONS */
+/* ===================================== */
+
+@keyframes slideUp {
+
+  from {
+
+    transform: translateY(100%);
+  }
+
+  to {
+
+    transform: translateY(0);
+  }
 }
 
 @keyframes pop {
 
   from {
+
     opacity: 0;
-    transform: rotate(-45deg) scale(0.4);
+
+    transform:
+      rotate(-45deg)
+      scale(0.3);
   }
 
   to {
+
     opacity: 1;
-    transform: rotate(-45deg) scale(1);
+
+    transform:
+      rotate(-45deg)
+      scale(1);
   }
 }
 
-.theme-btn {
+@keyframes popIn {
 
-  width: 45px;
-  height: 45px;
-  border-radius: 999px;
-  background: var(--card);
-  border: 1px solid var(--border);
+  from {
+
+    opacity: 0;
+
+    transform:
+      scale(0.7)
+      translateY(20px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+}
+
+/* ===================================== */
+/* INPUTS */
+/* ===================================== */
+
+input {
+
+  color: var(--text);
+}
+
+input::placeholder {
+
+  color: #9ca3af;
+}
+
+/* ===================================== */
+/* MOBILE OPTIMIZATION */
+/* ===================================== */
+
+@media (max-width: 640px) {
+
+  .product-image {
+
+    height: 150px;
+  }
+
+  .product-card {
+
+    padding: 12px;
+  }
+
+  .checkout-sheet {
+
+    padding: 20px;
+  }
+
+  .success-box {
+
+    padding: 28px;
+  }
 }
