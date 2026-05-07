@@ -1,24 +1,24 @@
-/* Smooth transitions for Modal */
-.modal-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
+/* Custom Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Modal Overlay Blur */
+#modal-overlay {
     backdrop-filter: blur(4px);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-content {
-    transition: transform 0.3s ease-out;
+/* Slide Up Drawer Anim */
+#modal-sheet {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Quantity Button Animation */
-.qty-btn:active {
-    scale: 0.9;
-}
-
-/* Custom Scrollbar for Cart Items */
-.cart-items-list::-webkit-scrollbar {
-    width: 4px;
-}
-.cart-items-list::-webkit-scrollbar-thumb {
-    background: #27AE60;
-    border-radius: 10px;
+/* Image Scale Transition */
+img {
+    transition: transform 0.3s ease-in-out;
 }
