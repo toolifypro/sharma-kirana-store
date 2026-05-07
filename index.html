@@ -1,133 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharma Kirana Store | Promax Edition</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            yellow: '#FCD015',
-                            green: '#27AE60',
-                            dark: '#111827',
-                            gray: '#F3F4F6'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Sharma Kirana Store - Ultra Edition</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/a2d2706b41.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-white text-brand-dark antialiased pb-24">
 
-    <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-        <div class="max-w-md mx-auto px-4 py-3">
-            <div class="flex justify-between items-center mb-3">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-location-dot text-brand-green text-lg"></i>
-                    <div>
-                        <h1 class="text-sm font-bold leading-tight">Delivery in 10 mins</h1>
-                        <p class="text-xs text-gray-500 truncate w-40">Sharma Store, Main Bazar...</p>
-                    </div>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center font-bold">
-                    <i class="fa-regular fa-user"></i>
-                </div>
-            </div>
+<body>
 
-            <div class="relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
-                <input id="search-input" type="text" 
-                    class="block w-full pl-10 pr-3 py-2.5 border-none rounded-xl bg-brand-gray focus:ring-2 focus:ring-brand-green outline-none" 
-                    placeholder="Search groceries...">
-            </div>
-        </div>
-    </header>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur-lg bg-[var(--bg)]/90 border-b border-[var(--border)]">
 
-    <main class="max-w-md mx-auto px-4">
-        <section class="mt-4 flex overflow-x-auto gap-3 no-scrollbar">
-            <div class="shrink-0 w-[85%] rounded-2xl bg-brand-yellow p-5 h-32 flex flex-col justify-center">
-                <h2 class="text-xl font-bold">Fresh Milk</h2>
-                <p class="text-sm">Delivered Daily @ 6 AM</p>
-            </div>
-            <div class="shrink-0 w-[85%] rounded-2xl bg-brand-green p-5 h-32 text-white flex flex-col justify-center">
-                <h2 class="text-xl font-bold">Green Veggies</h2>
-                <p class="text-sm">Organic & Farm Fresh</p>
-            </div>
-        </section>
+    <div class="flex items-center justify-between p-4">
 
-        <section class="mt-8">
-            <h3 class="font-bold text-lg mb-4">Daily Essentials</h3>
-            <div id="product-grid" class="grid grid-cols-2 gap-4">
-                </div>
-        </section>
-    </main>
+      <div>
+        <h1 class="text-xl font-bold">Sharma Kirana</h1>
+        <p class="text-xs opacity-70">Promax Ultra Edition</p>
+      </div>
 
-    <div id="floating-cart" class="hidden fixed bottom-0 left-0 w-full p-4 z-40">
-        <div class="max-w-md mx-auto">
-            <button id="view-cart-btn" class="w-full bg-brand-green text-white rounded-2xl py-4 px-5 flex items-center justify-between shadow-2xl hover:scale-[1.02] active:scale-95 transition-transform">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-basket-shopping"></i>
-                    <div class="text-left">
-                        <p id="cart-count" class="text-xs font-medium opacity-80">0 Items</p>
-                        <p id="cart-total" class="font-bold">₹0</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-2 font-bold">
-                    View Cart <i class="fa-solid fa-chevron-right text-xs"></i>
-                </div>
-            </button>
-        </div>
+      <!-- OTAKU TOGGLE -->
+      <button id="theme-toggle" class="theme-btn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
     </div>
 
-    <div id="checkout-modal" class="fixed inset-0 z-50 invisible transition-all duration-300">
-        <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
-        
-        <div id="modal-sheet" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-[32px] p-6 translate-y-full transition-transform duration-300 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
-            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 cursor-pointer" id="close-drag"></div>
-            
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">My Basket</h3>
-                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <div id="cart-items-list" class="max-h-60 overflow-y-auto space-y-4 mb-6 no-scrollbar">
-                </div>
+    <!-- SEARCH -->
+    <div class="px-4 pb-3">
 
-            <div class="border-t border-dashed border-gray-200 pt-4 mb-6">
-                <div class="flex justify-between items-center text-gray-500 text-sm mb-1">
-                    <span>Subtotal</span>
-                    <span id="modal-subtotal">₹0</span>
-                </div>
-                <div class="flex justify-between items-center text-gray-500 text-sm mb-3">
-                    <span>Delivery Fee</span>
-                    <span class="text-brand-green font-bold text-xs uppercase">Free</span>
-                </div>
-                <div class="flex justify-between items-center font-bold text-lg">
-                    <span>Total Amount</span>
-                    <span id="modal-total" class="text-brand-dark">₹0</span>
-                </div>
-            </div>
+      <div class="relative">
 
-            <button id="place-order-btn" class="w-full bg-brand-yellow text-brand-dark font-black py-4 rounded-2xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all">
-                PLACE ORDER
-            </button>
-        </div>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search products..."
+          class="w-full rounded-2xl px-4 py-3 outline-none bg-[var(--card)] border border-[var(--border)]"
+        />
+
+      </div>
+
     </div>
 
-    <script src="script.js"></script>
+    <!-- CATEGORY BAR -->
+    <div id="category-bar" class="category-scroll px-4 pb-3 flex gap-3 overflow-x-auto">
+
+    </div>
+
+  </header>
+
+  <!-- PRODUCT GRID -->
+  <main id="product-grid" class="grid grid-cols-2 gap-4 p-4 pb-32">
+
+  </main>
+
+  <!-- FLOATING CART -->
+  <button
+    id="view-cart-btn"
+    class="fixed bottom-4 left-4 right-4 bg-[var(--accent)] text-white rounded-2xl py-4 font-bold shadow-xl z-50"
+  >
+    View Cart
+  </button>
+
+  <!-- CHECKOUT SHEET -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+
+    <div class="checkout-sheet">
+
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold">Your Cart</h2>
+
+        <button onclick="closeCheckoutModal()">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div id="checkout-items" class="space-y-3 max-h-80 overflow-y-auto"></div>
+
+      <div class="mt-5 flex justify-between font-bold text-lg">
+        <span>Total</span>
+        <span id="checkout-total">₹0</span>
+      </div>
+
+      <button
+        onclick="placeOrder()"
+        class="mt-5 w-full bg-[var(--accent)] text-white py-4 rounded-2xl font-bold"
+      >
+        Place Order
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div id="success-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-black/50 backdrop-blur-md">
+
+    <div class="success-box">
+
+      <div class="checkmark-wrapper">
+        <div class="checkmark"></div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-4">Order Confirmed 🎉</h2>
+
+      <p id="success-summary" class="mt-2 text-sm opacity-70 text-center"></p>
+
+      <button
+        onclick="closeSuccessModal()"
+        class="mt-6 bg-[var(--accent)] text-white px-6 py-3 rounded-xl font-bold"
+      >
+        Continue Shopping
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
