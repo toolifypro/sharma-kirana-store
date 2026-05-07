@@ -359,7 +359,41 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <!-- FIREBASE SDK -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBh7QJDF5DBI4xKnKwvPwE5IUw9W7-XFvo",
+  authDomain: "sharma-kirana-store-b221a.firebaseapp.com",
+  projectId: "sharma-kirana-store-b221a",
+  storageBucket: "sharma-kirana-store-b221a.firebasestorage.app",
+  messagingSenderId: "207833776822",
+  appId: "1:207833776822:web:8c14080ae0fa481dbd9c17"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// GLOBAL
+window.auth = auth;
+window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+window.onAuthStateChanged = onAuthStateChanged;
+window.signOut = signOut;
+
+</script>
+
+<script src="script.js"></script>
 
 </body>
 </html>
