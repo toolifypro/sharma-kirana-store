@@ -16,9 +16,6 @@
                             dark: '#111827',
                             gray: '#F3F4F6'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
                     }
                 }
             }
@@ -26,199 +23,80 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Hide scrollbar for horizontal scrolling but keep functionality */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Smooth Slide-up Animation for Cart */
+        #floating-cart {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
-<body class="bg-white text-brand-dark antialiased pb-20">
+<body class="bg-white text-brand-dark antialiased pb-24">
 
-    <!-- Sticky Header -->
     <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div class="max-w-md mx-auto px-4 py-3">
-            <!-- Location & Profile Row -->
             <div class="flex justify-between items-center mb-3">
                 <div class="flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-location-dot text-brand-green text-lg"></i>
                     <div>
                         <h1 class="text-sm font-bold leading-tight flex items-center gap-1">
-                            Delivery in 10 mins <i class="fa-solid fa-chevron-down text-xs"></i>
+                            Delivery in 2 Hours <i class="fa-solid fa-chevron-down text-xs"></i>
                         </h1>
-                        <p class="text-xs text-gray-500 truncate w-48">A-12, Sector 4, Rohini...</p>
+                        <p class="text-xs text-gray-500 truncate w-48">Select your delivery location</p>
                     </div>
                 </div>
                 <div class="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center text-brand-dark font-bold shadow-sm">
                     <i class="fa-regular fa-user"></i>
                 </div>
             </div>
-
-            <!-- Search Bar -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 </div>
-                <input type="text" class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl leading-5 bg-brand-gray placeholder-gray-500 focus:outline-none focus:bg-white focus:border-brand-green focus:ring-1 focus:ring-brand-green sm:text-sm transition-colors" placeholder="Search 'Amul Milk'">
+                <input type="text" class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl bg-brand-gray placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-brand-green sm:text-sm" placeholder="Search for products...">
             </div>
         </div>
     </header>
 
     <main class="max-w-md mx-auto">
-        <!-- Hero Banners (Horizontal Scroll) -->
         <section class="mt-4 px-4">
             <div class="flex overflow-x-auto gap-4 no-scrollbar snap-x">
-                <div class="snap-center shrink-0 w-full rounded-2xl bg-gradient-to-r from-brand-yellow to-yellow-400 p-5 relative overflow-hidden h-40 flex flex-col justify-center shadow-sm">
-                    <h2 class="text-2xl font-black text-brand-dark z-10 w-2/3 leading-tight">Fresh Veggies<br>Up to 20% Off</h2>
-                    <p class="text-sm font-medium mt-1 z-10">Use code: SHARMA20</p>
-                    <i class="fa-solid fa-leaf absolute -bottom-4 -right-4 text-8xl text-yellow-500 opacity-30 z-0 transform -rotate-12"></i>
-                </div>
-                <!-- Duplicate for demo -->
-                <div class="snap-center shrink-0 w-full rounded-2xl bg-gradient-to-r from-brand-green to-green-500 p-5 relative overflow-hidden h-40 flex flex-col justify-center shadow-sm">
-                    <h2 class="text-2xl font-black text-white z-10 w-2/3 leading-tight">Daily Dairy<br>Essentials</h2>
-                    <p class="text-sm font-medium mt-1 text-green-100 z-10">Delivered Ice Cold</p>
-                    <i class="fa-solid fa-cow absolute -bottom-4 -right-4 text-8xl text-green-700 opacity-20 z-0"></i>
+                <div class="snap-center shrink-0 w-full rounded-2xl bg-gradient-to-r from-brand-yellow to-yellow-400 p-5 relative overflow-hidden h-40 flex flex-col justify-center">
+                    <h2 class="text-2xl font-black text-brand-dark z-10 w-2/3 leading-tight">Sharma Deals<br>Up to 20% Off</h2>
+                    <p class="text-sm font-medium mt-1 z-10">Best prices in the neighborhood</p>
+                    <i class="fa-solid fa-bag-shopping absolute -bottom-4 -right-4 text-8xl text-yellow-500 opacity-30 z-0 transform -rotate-12"></i>
                 </div>
             </div>
         </section>
 
-        <!-- Categories Grid -->
         <section class="mt-8 px-4">
             <h3 class="font-bold text-lg mb-4">Explore Categories</h3>
-            <div class="grid grid-cols-4 gap-y-6 gap-x-2 text-center">
-                <div class="flex flex-col items-center gap-2 cursor-pointer group">
-                    <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-500 text-2xl group-hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-glass-water"></i>
-                    </div>
-                    <span class="text-xs font-semibold text-gray-700">Milk & Dairy</span>
-                </div>
-                <div class="flex flex-col items-center gap-2 cursor-pointer group">
-                    <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center text-green-500 text-2xl group-hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-carrot"></i>
-                    </div>
-                    <span class="text-xs font-semibold text-gray-700">Vegetables</span>
-                </div>
-                <div class="flex flex-col items-center gap-2 cursor-pointer group">
-                    <div class="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 text-2xl group-hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-cookie"></i>
-                    </div>
-                    <span class="text-xs font-semibold text-gray-700">Snacks</span>
-                </div>
-                <div class="flex flex-col items-center gap-2 cursor-pointer group">
-                    <div class="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center text-red-500 text-2xl group-hover:shadow-md transition-shadow">
-                        <i class="fa-solid fa-apple-whole"></i>
-                    </div>
-                    <span class="text-xs font-semibold text-gray-700">Fruits</span>
-                </div>
+            <div class="grid grid-cols-4 gap-y-6 gap-x-2 text-center text-xs font-semibold">
+                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-500"><i class="fa-solid fa-glass-water"></i></div>Milk</div>
+                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center text-green-500"><i class="fa-solid fa-carrot"></i></div>Veggies</div>
+                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500"><i class="fa-solid fa-cookie"></i></div>Snacks</div>
+                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center text-red-500"><i class="fa-solid fa-apple-whole"></i></div>Fruits</div>
             </div>
         </section>
 
-        <!-- Trending Products -->
         <section class="mt-10 px-4">
             <h3 class="font-bold text-lg mb-4">Daily Needs</h3>
-            <div class="grid grid-cols-2 gap-4">
-                
-                <!-- Product Card 1 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col relative group">
-                    <div class="absolute top-0 left-0 bg-brand-yellow text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-2xl z-10">
-                        10% OFF
-                    </div>
-                    <div class="h-28 w-full bg-brand-gray rounded-xl flex items-center justify-center text-gray-400 mb-3 group-hover:bg-gray-200 transition-colors">
-                        <i class="fa-solid fa-jug-detergent text-3xl"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-sm font-semibold text-gray-800 leading-tight mb-1">Amul Taaza Toned Milk</h4>
-                        <p class="text-xs text-gray-500 mb-3">500 ml</p>
-                    </div>
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex flex-col">
-                            <span class="text-xs text-gray-400 line-through">₹28</span>
-                            <span class="text-sm font-bold">₹25</span>
-                        </div>
-                        <button class="bg-brand-gray border border-brand-green text-brand-green font-bold text-sm px-4 py-1.5 rounded-lg hover:bg-brand-green hover:text-white transition-colors">
-                            ADD
-                        </button>
-                    </div>
+            <div id="product-grid" class="grid grid-cols-2 gap-4">
                 </div>
-
-                <!-- Product Card 2 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col group">
-                    <div class="h-28 w-full bg-brand-gray rounded-xl flex items-center justify-center text-gray-400 mb-3 group-hover:bg-gray-200 transition-colors">
-                        <i class="fa-brands fa-pagelines text-3xl"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-sm font-semibold text-gray-800 leading-tight mb-1">Fresh Coriander (Dhania)</h4>
-                        <p class="text-xs text-gray-500 mb-3">100 g</p>
-                    </div>
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold">₹15</span>
-                        </div>
-                        <button class="bg-brand-gray border border-brand-green text-brand-green font-bold text-sm px-4 py-1.5 rounded-lg hover:bg-brand-green hover:text-white transition-colors">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-
-                 <!-- Product Card 3 -->
-                 <div class="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col group">
-                    <div class="h-28 w-full bg-brand-gray rounded-xl flex items-center justify-center text-gray-400 mb-3 group-hover:bg-gray-200 transition-colors">
-                        <i class="fa-solid fa-box-open text-3xl"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-sm font-semibold text-gray-800 leading-tight mb-1">Haldiram's Bhujia Sev</h4>
-                        <p class="text-xs text-gray-500 mb-3">400 g</p>
-                    </div>
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold">₹110</span>
-                        </div>
-                        <button class="bg-brand-gray border border-brand-green text-brand-green font-bold text-sm px-4 py-1.5 rounded-lg hover:bg-brand-green hover:text-white transition-colors">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-3 shadow-sm flex flex-col relative group">
-                    <div class="absolute top-0 left-0 bg-brand-yellow text-[10px] font-bold px-2 py-1 rounded-br-lg rounded-tl-2xl z-10">
-                        BESTSELLER
-                    </div>
-                    <div class="h-28 w-full bg-brand-gray rounded-xl flex items-center justify-center text-gray-400 mb-3 group-hover:bg-gray-200 transition-colors">
-                        <i class="fa-solid fa-egg text-3xl"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-sm font-semibold text-gray-800 leading-tight mb-1">Farm Fresh White Eggs</h4>
-                        <p class="text-xs text-gray-500 mb-3">6 pcs</p>
-                    </div>
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold">₹48</span>
-                        </div>
-                        <button class="bg-brand-gray border border-brand-green text-brand-green font-bold text-sm px-4 py-1.5 rounded-lg hover:bg-brand-green hover:text-white transition-colors">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-
-            </div>
         </section>
     </main>
 
-    <!-- Floating Cart Checkout (Fixed Bottom) -->
-    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-3 z-50">
+    <div id="floating-cart" class="hidden translate-y-full fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-3 z-50">
         <div class="max-w-md mx-auto">
-            <button class="w-full bg-brand-green text-white rounded-xl py-3 px-4 flex items-center justify-between shadow-lg hover:bg-green-700 transition-colors">
+            <button id="view-cart-btn" class="w-full bg-brand-green text-white rounded-xl py-3 px-4 flex items-center justify-between shadow-lg">
                 <div class="flex items-center gap-3">
                     <div class="bg-green-700 rounded-lg p-1.5 flex items-center justify-center">
                         <i class="fa-solid fa-cart-shopping text-sm"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-xs font-medium text-green-100">2 Items</p>
-                        <p class="text-sm font-bold leading-none">₹73</p>
+                        <p id="cart-count" class="text-xs font-medium text-green-100">0 Items</p>
+                        <p id="cart-total" class="text-sm font-bold leading-none">₹0</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2 font-bold text-sm">
@@ -228,5 +106,6 @@
         </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
