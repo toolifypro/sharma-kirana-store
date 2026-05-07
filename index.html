@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharma Kirana Store | Promax Edition</title>
-    <!-- Tailwind CSS & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Style Connection -->
     <link rel="stylesheet" href="style.css">
     
     <script>
@@ -29,16 +27,10 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Smooth transition for the checkout slide-up */
-        #checkout-modal {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
     </style>
 </head>
 <body class="bg-white text-brand-dark antialiased pb-24">
 
-    <!-- Sticky Header -->
     <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
         <div class="max-w-md mx-auto px-4 py-3">
             <div class="flex justify-between items-center mb-3">
@@ -54,9 +46,8 @@
                 </div>
             </div>
 
-            <!-- Search Bar -->
             <div class="relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
                 <input id="search-input" type="text" 
                     class="block w-full pl-10 pr-3 py-2.5 border-none rounded-xl bg-brand-gray focus:ring-2 focus:ring-brand-green outline-none" 
                     placeholder="Search groceries...">
@@ -65,7 +56,6 @@
     </header>
 
     <main class="max-w-md mx-auto px-4">
-        <!-- Hero Slider (Static for UI) -->
         <section class="mt-4 flex overflow-x-auto gap-3 no-scrollbar">
             <div class="shrink-0 w-[85%] rounded-2xl bg-brand-yellow p-5 h-32 flex flex-col justify-center">
                 <h2 class="text-xl font-bold">Fresh Milk</h2>
@@ -77,16 +67,13 @@
             </div>
         </section>
 
-        <!-- Product Grid -->
         <section class="mt-8">
             <h3 class="font-bold text-lg mb-4">Daily Essentials</h3>
             <div id="product-grid" class="grid grid-cols-2 gap-4">
-                <!-- Products will be rendered here by script.js -->
-            </div>
+                </div>
         </section>
     </main>
 
-    <!-- Floating Cart -->
     <div id="floating-cart" class="hidden fixed bottom-0 left-0 w-full p-4 z-40">
         <div class="max-w-md mx-auto">
             <button id="view-cart-btn" class="w-full bg-brand-green text-white rounded-2xl py-4 px-5 flex items-center justify-between shadow-2xl hover:scale-[1.02] active:scale-95 transition-transform">
@@ -104,21 +91,21 @@
         </div>
     </div>
 
-    <!-- Checkout Modal (Bottom Sheet) -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 invisible">
-        <!-- Backdrop -->
-        <div id="modal-overlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+    <div id="checkout-modal" class="fixed inset-0 z-50 invisible transition-all duration-300">
+        <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
         
-        <!-- Sheet Content -->
-        <div class="absolute bottom-0 left-0 w-full bg-white rounded-t-[32px] p-6 translate-y-full shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
-            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+        <div id="modal-sheet" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white rounded-t-[32px] p-6 translate-y-full transition-transform duration-300 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6 cursor-pointer" id="close-drag"></div>
             
-            <h3 class="text-xl font-bold mb-4">My Basket</h3>
-            
-            <!-- Items Container -->
-            <div id="cart-items-list" class="max-h-60 overflow-y-auto space-y-4 mb-6 no-scrollbar">
-                <!-- JS will inject items here -->
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">My Basket</h3>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
+            
+            <div id="cart-items-list" class="max-h-60 overflow-y-auto space-y-4 mb-6 no-scrollbar">
+                </div>
 
             <div class="border-t border-dashed border-gray-200 pt-4 mb-6">
                 <div class="flex justify-between items-center text-gray-500 text-sm mb-1">
@@ -135,13 +122,12 @@
                 </div>
             </div>
 
-            <button onclick="alert('Order Placed Successfully!')" class="w-full bg-brand-yellow text-brand-dark font-black py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+            <button id="place-order-btn" class="w-full bg-brand-yellow text-brand-dark font-black py-4 rounded-2xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all">
                 PLACE ORDER
             </button>
         </div>
     </div>
 
-    <!-- Script Connection -->
     <script src="script.js"></script>
 </body>
 </html>
