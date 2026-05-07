@@ -586,3 +586,73 @@ input::placeholder {
   right: 0;
   z-index: 9999;
 }
+// =======================
+// AUTH MODAL
+// =======================
+
+const authModal = document.getElementById("auth-modal");
+
+// OPEN LOGIN IF USER NOT LOGGED IN
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    console.log("Logged in:", user.email);
+
+    authModal.classList.add("hidden");
+
+  } else {
+
+    authModal.classList.remove("hidden");
+  }
+});
+
+// SIGNUP
+async function signup() {
+
+  const email =
+    document.getElementById("auth-email").value;
+
+  const password =
+    document.getElementById("auth-password").value;
+
+  try {
+
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    alert("Account Created 🚀");
+
+  } catch (error) {
+
+    alert(error.message);
+  }
+}
+
+// LOGIN
+async function login() {
+
+  const email =
+    document.getElementById("auth-email").value;
+
+  const password =
+    document.getElementById("auth-password").value;
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    alert("Login Successful 🔥");
+
+  } catch (error) {
+
+    alert(error.message);
+  }
+}
