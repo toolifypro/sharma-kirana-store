@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharma Kirana Store | Instant Delivery</title>
+    <title>Sharma Kirana Store | Promax Edition</title>
+    <!-- Tailwind CSS & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Connection -->
+    <link rel="stylesheet" href="style.css">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -21,91 +26,122 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Smooth Slide-up Animation for Cart */
-        #floating-cart {
+        /* Smooth transition for the checkout slide-up */
+        #checkout-modal {
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
 <body class="bg-white text-brand-dark antialiased pb-24">
 
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
         <div class="max-w-md mx-auto px-4 py-3">
             <div class="flex justify-between items-center mb-3">
-                <div class="flex items-center gap-2 cursor-pointer">
+                <div class="flex items-center gap-2">
                     <i class="fa-solid fa-location-dot text-brand-green text-lg"></i>
                     <div>
-                        <h1 class="text-sm font-bold leading-tight flex items-center gap-1">
-                            Delivery in 2 Hours <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </h1>
-                        <p class="text-xs text-gray-500 truncate w-48">Select your delivery location</p>
+                        <h1 class="text-sm font-bold leading-tight">Delivery in 10 mins</h1>
+                        <p class="text-xs text-gray-500 truncate w-40">Sharma Store, Main Bazar...</p>
                     </div>
                 </div>
-                <div class="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center text-brand-dark font-bold shadow-sm">
+                <div class="w-10 h-10 rounded-full bg-brand-yellow flex items-center justify-center font-bold">
                     <i class="fa-regular fa-user"></i>
                 </div>
             </div>
+
+            <!-- Search Bar -->
             <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                </div>
-                <input type="text" class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-xl bg-brand-gray placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-brand-green sm:text-sm" placeholder="Search for products...">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+                <input id="search-input" type="text" 
+                    class="block w-full pl-10 pr-3 py-2.5 border-none rounded-xl bg-brand-gray focus:ring-2 focus:ring-brand-green outline-none" 
+                    placeholder="Search groceries...">
             </div>
         </div>
     </header>
 
-    <main class="max-w-md mx-auto">
-        <section class="mt-4 px-4">
-            <div class="flex overflow-x-auto gap-4 no-scrollbar snap-x">
-                <div class="snap-center shrink-0 w-full rounded-2xl bg-gradient-to-r from-brand-yellow to-yellow-400 p-5 relative overflow-hidden h-40 flex flex-col justify-center">
-                    <h2 class="text-2xl font-black text-brand-dark z-10 w-2/3 leading-tight">Sharma Deals<br>Up to 20% Off</h2>
-                    <p class="text-sm font-medium mt-1 z-10">Best prices in the neighborhood</p>
-                    <i class="fa-solid fa-bag-shopping absolute -bottom-4 -right-4 text-8xl text-yellow-500 opacity-30 z-0 transform -rotate-12"></i>
-                </div>
+    <main class="max-w-md mx-auto px-4">
+        <!-- Hero Slider (Static for UI) -->
+        <section class="mt-4 flex overflow-x-auto gap-3 no-scrollbar">
+            <div class="shrink-0 w-[85%] rounded-2xl bg-brand-yellow p-5 h-32 flex flex-col justify-center">
+                <h2 class="text-xl font-bold">Fresh Milk</h2>
+                <p class="text-sm">Delivered Daily @ 6 AM</p>
+            </div>
+            <div class="shrink-0 w-[85%] rounded-2xl bg-brand-green p-5 h-32 text-white flex flex-col justify-center">
+                <h2 class="text-xl font-bold">Green Veggies</h2>
+                <p class="text-sm">Organic & Farm Fresh</p>
             </div>
         </section>
 
-        <section class="mt-8 px-4">
-            <h3 class="font-bold text-lg mb-4">Explore Categories</h3>
-            <div class="grid grid-cols-4 gap-y-6 gap-x-2 text-center text-xs font-semibold">
-                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-500"><i class="fa-solid fa-glass-water"></i></div>Milk</div>
-                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center text-green-500"><i class="fa-solid fa-carrot"></i></div>Veggies</div>
-                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500"><i class="fa-solid fa-cookie"></i></div>Snacks</div>
-                <div class="flex flex-col items-center gap-2"><div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center text-red-500"><i class="fa-solid fa-apple-whole"></i></div>Fruits</div>
-            </div>
-        </section>
-
-        <section class="mt-10 px-4">
-            <h3 class="font-bold text-lg mb-4">Daily Needs</h3>
+        <!-- Product Grid -->
+        <section class="mt-8">
+            <h3 class="font-bold text-lg mb-4">Daily Essentials</h3>
             <div id="product-grid" class="grid grid-cols-2 gap-4">
-                </div>
+                <!-- Products will be rendered here by script.js -->
+            </div>
         </section>
     </main>
 
-    <div id="floating-cart" class="hidden translate-y-full fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-3 z-50">
+    <!-- Floating Cart -->
+    <div id="floating-cart" class="hidden fixed bottom-0 left-0 w-full p-4 z-40">
         <div class="max-w-md mx-auto">
-            <button id="view-cart-btn" class="w-full bg-brand-green text-white rounded-xl py-3 px-4 flex items-center justify-between shadow-lg">
+            <button id="view-cart-btn" class="w-full bg-brand-green text-white rounded-2xl py-4 px-5 flex items-center justify-between shadow-2xl hover:scale-[1.02] active:scale-95 transition-transform">
                 <div class="flex items-center gap-3">
-                    <div class="bg-green-700 rounded-lg p-1.5 flex items-center justify-center">
-                        <i class="fa-solid fa-cart-shopping text-sm"></i>
-                    </div>
+                    <i class="fa-solid fa-basket-shopping"></i>
                     <div class="text-left">
-                        <p id="cart-count" class="text-xs font-medium text-green-100">0 Items</p>
-                        <p id="cart-total" class="text-sm font-bold leading-none">₹0</p>
+                        <p id="cart-count" class="text-xs font-medium opacity-80">0 Items</p>
+                        <p id="cart-total" class="font-bold">₹0</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 font-bold text-sm">
-                    View Cart <i class="fa-solid fa-arrow-right"></i>
+                <div class="flex items-center gap-2 font-bold">
+                    View Cart <i class="fa-solid fa-chevron-right text-xs"></i>
                 </div>
             </button>
         </div>
     </div>
 
+    <!-- Checkout Modal (Bottom Sheet) -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 invisible">
+        <!-- Backdrop -->
+        <div id="modal-overlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+        
+        <!-- Sheet Content -->
+        <div class="absolute bottom-0 left-0 w-full bg-white rounded-t-[32px] p-6 translate-y-full shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+            
+            <h3 class="text-xl font-bold mb-4">My Basket</h3>
+            
+            <!-- Items Container -->
+            <div id="cart-items-list" class="max-h-60 overflow-y-auto space-y-4 mb-6 no-scrollbar">
+                <!-- JS will inject items here -->
+            </div>
+
+            <div class="border-t border-dashed border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between items-center text-gray-500 text-sm mb-1">
+                    <span>Subtotal</span>
+                    <span id="modal-subtotal">₹0</span>
+                </div>
+                <div class="flex justify-between items-center text-gray-500 text-sm mb-3">
+                    <span>Delivery Fee</span>
+                    <span class="text-brand-green font-bold text-xs uppercase">Free</span>
+                </div>
+                <div class="flex justify-between items-center font-bold text-lg">
+                    <span>Total Amount</span>
+                    <span id="modal-total" class="text-brand-dark">₹0</span>
+                </div>
+            </div>
+
+            <button onclick="alert('Order Placed Successfully!')" class="w-full bg-brand-yellow text-brand-dark font-black py-4 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                PLACE ORDER
+            </button>
+        </div>
+    </div>
+
+    <!-- Script Connection -->
     <script src="script.js"></script>
 </body>
 </html>
